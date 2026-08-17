@@ -4,6 +4,8 @@ import logging
 from app.core.config import settings
 from app.core.logging import configure_logging
 from app.routers.health import router as health_router
+from app.routers.meetings import router as meetings_router
+
 
 configure_logging()
 
@@ -24,7 +26,9 @@ def startup_event() -> None:
         settings.environment
     )
 
+#Registers the routers with the main application, making FastAPI aware of it.
 app.include_router(health_router)
+app.include_router(meetings_router)
 
 
 @app.get("/")
